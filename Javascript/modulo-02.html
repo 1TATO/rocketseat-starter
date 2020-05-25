@@ -1,0 +1,72 @@
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo 02</title>
+  </head>
+
+  <body>
+    <button class="botao">Adicionar box</button>
+    <div class="box"></div>
+
+    <div class="nomes"></div>
+
+    <input type="text" name="nome">
+    <button onClick="adicionar()">Adicionar nome</button>
+  </body>
+
+  <script>
+    var btnElement = document.querySelector('.botao');
+
+    btnElement.onclick = function () {
+      var boxElement = document.createElement('div');
+
+      boxElement.style.width = 100;
+      boxElement.style.height = 100;
+      boxElement.style.backgroundColor = '#f00';
+
+      boxElement.onmouseover = function() {
+        boxElement.style.backgroundColor = getRandomColor();
+      };
+
+      var containerElement = document.querySelector('.box');
+      containerElement.appendChild(boxElement);
+    }
+
+    function getRandomColor() {
+      var letters = "0123456789ABCDEF";
+      var color = "#";
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    var nomes = ["Diego", "Gabriel", "Lucas"];
+    // CRIANDO A UL
+    var listElement = document.createElement('ul');
+    listElement.setAttribute('id', 'lista');
+
+    for (var i = 0; i < nomes.length; i++) {
+      // CRIANDO AS LIS PRA CADA NOME DO ARRAY
+      var nome = document.createElement('li');
+      nome.appendChild(document.createTextNode(nomes[i]));
+      listElement.appendChild(nome);
+    }
+
+    containerElement = document.querySelector('.nomes');
+    containerElement.appendChild(listElement);
+
+    function adicionar() {
+      var newName = document.querySelector('input');
+
+      text = document.createElement('li')
+      text.appendChild(document.createTextNode(newName.value))
+      listElement.appendChild(text)
+
+      // LIMPA O CONTEUDO DO INPUT
+      newName.value = '';
+    }
+  </script>
+
+</html>
